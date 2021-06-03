@@ -63,7 +63,7 @@ export const Provider = (props: ProviderProps) => {
   useEffect(() => {
     if (!Array.isArray(props.packages)) return;
     setTranslation(new Translation(props.currentLanguage, ...props.packages));
-  }, [props.packages, props.currentLanguage]);
+  }, [props.packages, props.currentLanguage, setTranslation]);
 
   return (
     <context.Provider value={[translation, setTranslation]}>
@@ -93,7 +93,7 @@ export const useTranslation = (domains: string[]): TranslationHelper => {
       ...domains
     );
     setLanguageContext(langCtx);
-  }, [domains, translation]);
+  }, [domains, translation, setLanguageContext]);
 
   const tranFn = useCallback(
     (src: string): string => {
